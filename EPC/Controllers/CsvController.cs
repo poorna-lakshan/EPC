@@ -17,13 +17,13 @@ using System.Web.Mvc;
 
 namespace EPC.Controllers
 {
-    public class DefaultController : Controller
+    public class CsvController : Controller
     {
 
         ApplicationDbContext _con;
 
 
-        public DefaultController()
+        public CsvController()
         {
             _con = new ApplicationDbContext();
         }
