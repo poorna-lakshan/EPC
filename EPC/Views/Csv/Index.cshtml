@@ -4,7 +4,7 @@
 
 <h4>Import CSV</h4>
 <hr />
-@using (Html.BeginForm("UploadExcel", "Default", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
+@using (Html.BeginForm("UploadExcel", "Csv", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
 {
 
     <form class="form-inline" style="width:100%">
@@ -16,6 +16,6 @@
         <input type="submit" value="Submit" id="btnSubmit" class="btn btn-primary" />
     </form>
 }
-<br />
+<br/>
 
 <p>@ViewBag.Feedback </p>
