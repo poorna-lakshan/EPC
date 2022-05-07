@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<head>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+    <!-- CSS only -->
+</head>
+<h4>Cunsumtion Summary</h4>
+<hr />
+<form class="form-inline">
+    <div class="form-group">
+        <div class="input-group">
+            <div class="input-group-addon">Customer</div>
+            <select name="Customer_id" id="Customer_id" class="form-control" aria-label="Default select example">
+                <option selected value="QI_BL1_1_PV">QI_BL1_1@PV</option>
+                <option value="QI_BL2_1_PV">QI_BL2_1@PV</option>
+                <option value="QI_BL3_1_PV">QI_BL3_1@PV</option>
+                <option value="QI_BL4_1_PV">QI_BL4_1@PV</option>
+                <option value="QI_BLA_1_PV">QI_BLA_1@PV</option>
+                <option value="QI_BL5_1_PV">QI_BL5_1@PV</option>
+                <option value="QI_BL6_1_PV">QI_BL6_1@PV</option>
+                <option value="QI_BL7_1_PV">QI_BL7_1@PV</option>
+                <option value="QI_NTU_1_PV">QI_NTU_1@PV</option>
+                <option value="QI_BP2_1_PV">QI_BP2_1@PV</option>
+                <option value="QI_FUS_1_PV">QI_FUS_1@PV</option>
+                <option value="QI_F2B_PV">QI_F2B@PV</option>
+                <option value="QI_MUD_PV">QI_MUD@PV</option>
+                <option value="QI_HOT_PV">QI_HOT@PV</option>
+                <option value="QI_BP3_PV">QI_BP3@PV</option>
+            </select>
+
+        </div>
+    </div>
+    <input type="button" value="Submit" id="btnSubmit" class="btn btn-primary" />
+</form>
+
+
+
+
+<p>
+
+    <table class="table table-striped table-bordered" id="ProductsTable" style="width:400px" align="center">
+        <thead>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+</p>
+
+<br />
+
+<div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<script>
+    $(document).ready(function () {
+
+        $('#btnSubmit').click(function () {
+            var Customer_id = $('#Customer_id').val();
+    $.ajax({
+        method: 'get',
+        url: '/CunsumtionSummary/json',
+        data: {'Customer_id': Customer_id },
+        contentType: "application/json",
+        dataType: "json",
+        success: function (data) {
+
+            $("#ProductsTable > tbody").empty();
+            $("#ProductsTable > thead").empty();
+            var theadHTML = '<tr style="font-weight:bold"><td>Customer</td><td>' + $('#Customer_id').val() + '</td></tr>';
+            $("#ProductsTable").find('thead').append(theadHTML);
+            var trHTML = '';
+            var total = 0;
+            $.each(data, function (i, item) {
+                trHTML += '<tr><td>' + item['x'].toFixed(2).replace(".", ":") + '</td><td>' + item['y'] + '</td></tr>';
+                total += item['y'];
+            });
+            trHTML += '<tr style="font-weight:bold"><td>Total</td><td>' + total.toFixed(2); + '</td></tr>';
+            $("#ProductsTable").find('tbody').append(trHTML);
+
+
+            var chart
+
+
+
+            chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                zoomEnabled: true,
+                title: {
+                    text: "Power Consumption "
+                },
+                axisX: {
+                    valueFormatString: "00:00"
+                },
+                axisY: {
+                    title: "KW",
+                },
+                data: [{
+                    type: "spline",
+                    dataPoints: data
+                    //dataPoints: [{ "x": 1637597471269.0, "y": 2500.0 }, { "x": 1637683871269.0, "y": 2600.0 }, { "x": 1637770271269.0, "y": 2700.0 }]
+                }]
+            });
+
+            chart.render();
+
+        }
+    });
+
+        });
+    });
+
+</script>
+
+
+

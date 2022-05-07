@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h4>Import CSV</h4>
+<hr />
+@using (Html.BeginForm("UploadExcel", "Default", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
+{
+
+    <form class="form-inline" style="width:100%">
+        <div class="form-group">
+            <div class="input-group">
+                <input type="file" id="FileUpload" name="FileUpload" class="" />
+            </div>
+        </div>
+        <input type="submit" value="Submit" id="btnSubmit" class="btn btn-primary" />
+    </form>
+}
+<br />
+
+<p>@ViewBag.Feedback </p>

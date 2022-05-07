@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h4>View Peak Data</h4>
+<hr />
+@using (Html.BeginForm("submit_data", "Peak", FormMethod.Post, new { onsubmit = "return myFunction()" }))
+{
+
+    <form class="form-inline" style="width:100%">
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">Customer</div>
+                <select name="Customer_id" id="Customer_id" class="form-control" aria-label="Default select example">
+                    <option selected value="QI_BL1_1_PV">QI_BL1_1@PV</option>
+                    <option value="QI_BL2_1_PV">QI_BL2_1@PV</option>
+                    <option value="QI_BL3_1_PV">QI_BL3_1@PV</option>
+                    <option value="QI_BL4_1_PV">QI_BL4_1@PV</option>
+                    <option value="QI_BLA_1_PV">QI_BLA_1@PV</option>
+                    <option value="QI_BL5_1_PV">QI_BL5_1@PV</option>
+                    <option value="QI_BL6_1_PV">QI_BL6_1@PV</option>
+                    <option value="QI_BL7_1_PV">QI_BL7_1@PV</option>
+                    <option value="QI_NTU_1_PV">QI_NTU_1@PV</option>
+                    <option value="QI_BP2_1_PV">QI_BP2_1@PV</option>
+                    <option value="QI_FUS_1_PV">QI_FUS_1@PV</option>
+                    <option value="QI_F2B_PV">QI_F2B@PV</option>
+                    <option value="QI_MUD_PV">QI_MUD@PV</option>
+                    <option value="QI_HOT_PV">QI_HOT@PV</option>
+                    <option value="QI_BP3_PV">QI_BP3@PV</option>
+                </select>
+
+            </div>
+        </div>
+        <input type="submit" value="Submit" id="btnSubmit" class="btn btn-primary" />
+    </form>
+}
+<br />
+<p>@ViewBag.Peak_Cnt</p>
+<p>@ViewBag.Peak_Max</p>
