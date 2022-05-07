@@ -34,14 +34,6 @@ namespace EPC.Controllers
             return View();
         }
 
-
-        public FileResult DownloadExcel()
-        {
-            string path = "/Doc/Users.xlsx";
-            return File(path, "application/vnd.ms-excel", "Users.xlsx");
-        }
-
-
         [HttpPost]
         public ActionResult UploadExcel(HttpPostedFileBase FileUpload)
         {
